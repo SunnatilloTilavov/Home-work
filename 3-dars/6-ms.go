@@ -8,4 +8,4 @@ var a int
     fmt.Scan(&a)
 	b := a / 60
 	c := a % 60
-	fmt.Println( b,"minut",c,"Sekunt o'tdi")}
+	fmt.Println( b,"minut",c,"sekunt o'tdi")}

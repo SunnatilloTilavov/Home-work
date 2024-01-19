@@ -17,7 +17,7 @@ func main() {
  p := g<d&&d<h
  c := q<d&&d<w
  x := d>z&&e<r
- fmt.Println(" vazn yerishmaydi: %v",k)
+ fmt.Println(" vazn yetishmaydi: %v",k)
  fmt.Println(" normal vazn: %v",p)
  fmt.Println(" biroz vazn ortiqcha: %v",c)
  fmt.Println(" xavfli: %v",x,j)
