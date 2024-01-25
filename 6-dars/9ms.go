@@ -10,11 +10,10 @@ func ass(a float64,b float64)float64{
 
 func main() {
 
- var a,b ,f float64
- fmt.Print("Kiriting:")
+ var a,b  float64
+ fmt.Print("A:")
  fmt.Scan(&a)
- fmt.Print("Kiriting:")
+ fmt.Print("B:")
  fmt.Scan(&b)
- fmt.Print(float64(f))
- ass(a,b)
+ fmt.Println(ass(a,b))
 }

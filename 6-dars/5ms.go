@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func kattason(a, b, c int) {
+func kattason(a, b, c int)int{
 
  var min, max, min1, max1,f int
 
@@ -24,8 +24,8 @@ func kattason(a, b, c int) {
   min1 = c
  }
   f=(min1+max1)/2
-  fmt.Println("Oradagi son ",f)
-
+  //fmt.Println("Oradagi son ",f)
+return f
 
 }
 
@@ -39,7 +39,7 @@ func main() {
  fmt.Scan(&b)
  fmt.Print("C=")
  fmt.Scan(&c)
-
- kattason(a, b, c)
+fmt.Println(kattason("Oradagi son",a,b,c))
+ //kattason(a, b, c)
 
 }

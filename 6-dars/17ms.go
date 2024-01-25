@@ -13,5 +13,6 @@ func main() {
  var a int
  fmt.Print("N=")
  fmt.Scan(&a)
+ fmt.Print((x))
  kattason(a)
 }
