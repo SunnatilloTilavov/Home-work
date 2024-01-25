@@ -1,14 +1,14 @@
-//7-ms
+//4-ms
 package main
 
 import (
 	"fmt")
 func main(){
-	var n ,a,b,son int
-	fmt.Println("n=")
+	var n ,a,son int
+	fmt.Print("n=")
 	fmt.Scan(&n)
 	slice:=make([]int,n)
-	fmt.Println(slice)
+	//fmt.Println(slice)
 	for i:=0;i<n;i++{
 		fmt.Print("son=")
 	    fmt.Scan(&son)
@@ -28,14 +28,12 @@ func main(){
 		if slice[i]==minnum{
 		a=i
 	}
-	if slice[i]==maxnum{
-		b=i
-	}
+	
     }
-	slice[a]=slice[b]
+	slice[a]=maxnum
    minnum2:=slice[0]
 	for _, sum:=range slice{
-		if sum<minnum{
+		if sum<minnum2{
 			minnum2=sum
 		}
 	}

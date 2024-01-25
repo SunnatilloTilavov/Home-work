@@ -3,10 +3,10 @@ package main
 import "fmt"
 func main(){
 	var n ,son,a int
-	fmt.Println("n=")
+	fmt.Print("n=")
 	fmt.Scan(&n)
 	slice:=make([]int,n)
-	fmt.Println(slice)
+	//fmt.Println(slice)
 	for i:=0;i<n;i++{
 		fmt.Print("son=")
 	    fmt.Scan(&son)

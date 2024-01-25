@@ -11,7 +11,7 @@ func main() {
 
 	for _ ,number:=range numbers{
 		if !newmap[number]
-		newarrr=append(newarr,number)
+		newarr=append(newarr,number)
 		newmap[number]=true
 	}
 	fmt.Println("newarr",newarr)

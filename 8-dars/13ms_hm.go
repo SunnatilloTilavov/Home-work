@@ -1,4 +1,4 @@
-//7-ms
+//8-ms
 package main
 
 import (
@@ -6,7 +6,7 @@ import (
 )
 func main(){
 	var n ,son int
-	fmt.Println("n=")
+	fmt.Print("n=")
 	fmt.Scan(&n)
 	slice:=make([]int,n)
 	fmt.Println(slice)

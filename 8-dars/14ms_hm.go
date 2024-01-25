@@ -1,14 +1,14 @@
-//7-ms
+//9-ms
 package main
 
 import (
 	"fmt")
 func main(){
 	var n ,a,b,son int
-	fmt.Println("n=")
+	fmt.Print("n=")
 	fmt.Scan(&n)
 	slice:=make([]int,n)
-	fmt.Println(slice)
+	//fmt.Println(slice)
 	for i:=0;i<n;i++{
 		fmt.Print("son=")
 	    fmt.Scan(&son)
