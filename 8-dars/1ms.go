@@ -5,8 +5,8 @@ import "fmt"
 
 func main() {
 	var arr=[]int{}
-	slice1 := make([]string, 5, 8)
-	
+	slice1 := make([]int, 5, 8)
+	fmt.Println("slice1",slice1)
 
 	arr1:=[3]int{1,2,3}
 	slice:=[]int{1,2,3,4,5}
@@ -24,12 +24,12 @@ func main() {
 	fmt.Println((*arr2)[0])
 
 	//map
-	map1 :=make(map(int),int)
-	map1:=("monday")="first day"
-  fmt.Println(map1)
+	//map1 :=make(map(int),int)
+	//map1:=("monday")="first day"
+   // fmt.Println(map1)
 
 
-  key:="mon"
-  map1[key]="firs day"
+  //key:="mon"
+  //map1[key]="firs day"
   
 }

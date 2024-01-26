@@ -1,7 +1,7 @@
 package main
 import "fmt"
 func main(){
-	num:=[]int(1,3,4,2,1,3,2,3,4,5)
+	num:=[]int{1,3,4,2,1,3,2,3,4,5}
 	newmap:=make(map[int]bool)
 	newarr:=make([]int,0,10)
 	for _,number:=range num{
