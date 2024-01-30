@@ -15,8 +15,27 @@ func (s *Student) sum() int {
 	}
 	return total
 }
-
+// array holida kiritish
 func main() {
+Student:=[]Student{
+	Student{
+		"Zafar",
+		1000,
+		3,
+	}
+	Student{
+		"Zafar",
+		1000,
+		3,
+	}
+	Student{
+		"Zafar",
+		1000,
+		3,
+	}
+}
+
+
 	student1:=Student{
 		name : "student1",
 		scholarship : 100,
