@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"strconv"
 )
 
 type Player struct {
@@ -50,13 +49,9 @@ func getPlayerName() string {
 }
 
 func getPlayerChance() int {
-	var playerChanceStr string
+	var playerChance int
 	fmt.Print("Please enter chance: ")
-	_, err := fmt.Scanln(&playerChanceStr)
-	if err != nil {
-		panic(err)
-	}
-	playerChance, err := strconv.Atoi(playerChanceStr)
+	_, err := fmt.Scanln(&playerChance)
 	if err != nil {
 		panic(err)
 	}
@@ -64,16 +59,13 @@ func getPlayerChance() int {
 }
 
 func getPlayerFavoritenumber() int {
-	var playerFavoritenumberStr string
+	var playerFavoritenumber int
 	fmt.Print("Please enter Favorite number: ")
-	_, err := fmt.Scanln(&playerFavoritenumberStr)
+	_, err := fmt.Scanln(&playerFavoritenumber)
 	if err != nil {
 		panic(err)
 	}
-	playerFavoritenumber, err := strconv.Atoi(playerFavoritenumberStr)
-	if err != nil {
-		panic(err)
-	}
+	
 	return playerFavoritenumber
 }
 
@@ -90,13 +82,13 @@ func (g *Game) StartGame() {
 		}
 
 		if g.Number == numb && g.Player.Favoritenumber != numb {
-			fmt.Println("You win!")
+			fmt.Println(g.Player.Name,"You win!")
 			break
 		} else if g.Number == numb && g.Player.Favoritenumber == numb {
-			fmt.Printf("You win! The number I chose was your favorite number (%v)\n", g.Number)
+			fmt.Printf(g.Player.Name,"You win! The number I chose was your favorite number %v\n", g.Number)
 			break
 		} else if i == chance {
-			fmt.Printf("You are a loser xD. Predicted number is %v\n", g.Number)
+			fmt.Printf(g.Player.Name,"You are a loser xD. Predicted number is %v\n", g.Number)
 		} else if g.Number != numb && numb > g.Number {
 			g.Player.Chance--
 			fmt.Printf("You didn't find. You have %v chance(s). Enter a smaller number. Try again:)\n", g.Player.Chance)
