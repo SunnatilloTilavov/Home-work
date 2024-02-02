@@ -9,6 +9,7 @@ type Player struct {
 	Name          string
 	Chance        int
 	Favoritenumber int
+	Age int
 }
 
 type Game struct {
@@ -26,12 +27,15 @@ func (p *Player) NewPlayer(name string, chance int, favoritenumber int) {
 	p.Name = name
 	p.Chance = chance
 	p.Favoritenumber = favoritenumber
+	
 }
 
 func main() {
 	playerName := getPlayerName()
+	playerChance:=getPlayerChance()
+	playerFavoritenumber:=getPlayerFavoritenumber()
 	player := Player{}
-	player.NewPlayer(playerName, getPlayerChance(), getPlayerFavoritenumber())
+	player.NewPlayer(playerName, playerChance, playerFavoritenumber)
 	game := Game{}
 	game.NewGame(player)
 	game.StartGame()
@@ -58,6 +62,7 @@ func getPlayerChance() int {
 	return playerChance
 }
 
+
 func getPlayerFavoritenumber() int {
 	var playerFavoritenumber int
 	fmt.Print("Please enter Favorite number: ")
@@ -65,14 +70,14 @@ func getPlayerFavoritenumber() int {
 	if err != nil {
 		panic(err)
 	}
-	
+
 	return playerFavoritenumber
 }
 
 func (g *Game) StartGame() {
 	chance := g.Player.Chance
-	s := g.Player.Chance*3 + 1
-	fmt.Printf("Choose a number between 0 and %v\n", s)
+	a := g.Player.Chance*3 + 1
+	fmt.Printf("Choose a number between 0 and %v\n", a)
 	for i := 1; i <= chance; i++ {
 		fmt.Printf("Your %v try. Please enter the number: ", i)
 		var numb int
@@ -85,16 +90,16 @@ func (g *Game) StartGame() {
 			fmt.Println(g.Player.Name,"You win!")
 			break
 		} else if g.Number == numb && g.Player.Favoritenumber == numb {
-			fmt.Printf(g.Player.Name,"You win! The number I chose was your favorite number %v\n", g.Number)
+			fmt.Printf("%v You win! The number I choose was your favorite number %v\n",g.Player.Name, g.Number)
 			break
 		} else if i == chance {
-			fmt.Printf(g.Player.Name,"You are a loser xD. Predicted number is %v\n", g.Number)
+			fmt.Printf(" %v You are a loser xD. Predicted number is %v\n", g.Player.Name,g.Number)
 		} else if g.Number != numb && numb > g.Number {
 			g.Player.Chance--
-			fmt.Printf("You didn't find. You have %v chance(s). Enter a smaller number. Try again:)\n", g.Player.Chance)
+			fmt.Printf("%v You didn't find. You have %v chance(s). Enter a smaller number. Try again:)\n", g.Player.Name, g.Player.Chance)
 		} else {
 			g.Player.Chance--
-			fmt.Printf("You didn't find. You have %v chance(s). Enter a bigger number. Try again:)\n", g.Player.Chance)
+			fmt.Printf("%v You didn't find. You have %v chance(s). Enter a bigger number. Try again:)\n", g.Player.Name, g.Player.Chance)
 		}
 	}
 }

@@ -112,7 +112,7 @@ func main() {
 	count1 := countOccurrences(client1.Basket, product1.Id)
 	count2 := countOccurrences(client2.Basket, product2.Id)
 	count3 := countOccurrences(client3.Basket, product3.Id)
-
+	
 	
 	fmt.Printf("%d %s\n", count1, product1.Name)
 	fmt.Printf("%d %s\n",  count2, product2.Name)
