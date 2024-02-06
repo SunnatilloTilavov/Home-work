@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"strings"
 )
-func main(){
-	a:="SASdadad"
-	b:=strings.ToLower(a)
+
+func main() {
+	a := "SASdadad"
+	b := strings.ToLower(a)
 	fmt.Print(b)
 }
 
