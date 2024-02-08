@@ -1,0 +1,21 @@
+
+[
+    {
+      "brand": "BMW",
+      "year": 2007,
+      "model": "M5",
+      "power": 15000
+    },
+    {
+        "brand": "Ford",
+        "year": 2019,
+        "model": "Mustang",
+        "power": 15000
+      },
+      {
+        "brand": "POrche",
+        "year": 2020,
+        "model": "Taycan",
+        "power": 15000
+      }
+]

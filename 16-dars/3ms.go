@@ -19,7 +19,6 @@ func main() {
 	for i := 0; i < len(courses); i++ {
 		for j := i + 1; j < len(courses); j++ {
 			if courses[i].Course > courses[j].Course {
-				// Almashtirish
 				courses[i], courses[j] = courses[j], courses[i]
 			}
 		}
