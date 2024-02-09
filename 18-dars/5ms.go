@@ -57,7 +57,7 @@ func main() {
         log.Fatal(err)
     }
 	fmt.Println("words:",words)
-fmt.Println("nums",nums)
+fmt.Println("nums:",nums)
 }
 
 
