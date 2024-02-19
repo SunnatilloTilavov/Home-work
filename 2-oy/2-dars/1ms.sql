@@ -1,4 +1,4 @@
-sudo -u postgres psql
+sudo -u postgres psql -d sqldatabase
 \l
 \c sqldatabase 
 Create table Student(id Serial,name varchar(34),age int,country varchar(34),salary int)
