@@ -57,4 +57,8 @@ ALTER TABLE City ADD COLUMN TIME_ADD TIME;
 UPDATE CITY SET City_name='TASHKENT1',TIME_ADD=current_timestamp WHERE City_id_id='6ba1eaa2-9335-4ce7-8661-3695d476d5ba';
 UPDATE CITY SET population=55555555,TIME_ADD=current_timestamp WHERE City_name='Toronto';
 
+SELECT City_name, COUNT(City_name) AS Soni
+FROM City
+GROUP BY City_name
+HAVING COUNT(City_name) > 2;
 
