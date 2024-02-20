@@ -45,11 +45,11 @@ func main() {
 		var id string
 		fmt.Println("IDni tanlang")
 		fmt.Scan(&id)
-		err = inv.Delete(country.Country{}, id)
+		err = inv.Delete(id)
 		if err != nil {
 			return
 		}
-		fmt.Println("Country created successfully")
+		fmt.Println("Country DELETE successfully")
 
 	case 2:
 		countries, err := inv.GetAll()

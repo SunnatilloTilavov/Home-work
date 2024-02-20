@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"homework/2-oy/4-dars/homework/country"
+
 	"github.com/google/uuid"
 )
 
@@ -29,13 +30,13 @@ func (i *Inventory) Create(c country.Country) error {
 
 	return nil
 }
-
-func (i *Inventory) Update(c country.Country,name string ,code int,id string ) error {
+func (i *Inventory) Update(c country.Country, name string, code int, id string) error {
 	_, err := i.db.Exec(
-		`UPDATE countries SET (name=$1,
-			code=$2,
-			update_at==CURRENT_TIMESTAMP,
-			where id=$3`,name,code,id)
+		`UPDATE countries SET 
+		    name=$2,
+			code=$3,
+			updated_at=NOW()
+			WHERE id = $1`, id, name, code)
 	if err != nil {
 		fmt.Println("error while updating country err: ", err)
 		return err
@@ -44,17 +45,19 @@ func (i *Inventory) Update(c country.Country,name string ,code int,id string ) e
 	return nil
 }
 
-func (i *Inventory) Delete(c country.Country,id string) error {
+
+func (i *Inventory) Delete(id string) error {
 	_, err := i.db.Exec(
-		`DELETE FROM countries(
-			where id=$1`,id)
+		`DELETE FROM countries
+			WHERE id = $1`, id)
 	if err != nil {
-		fmt.Println("error while delete  country err: ", err)
+		fmt.Println("error while deleting country: ", err)
 		return err
 	}
 
 	return nil
 }
+
 
 func (i *Inventory) GetAll() ([]country.Country, error) {
 	countries := []country.Country{}
