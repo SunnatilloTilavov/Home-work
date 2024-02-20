@@ -5,13 +5,16 @@ import (
 	"fmt"
 	"homework/2-oy/4-dars/homework/country"
 	"homework/2-oy/4-dars/homework/storage"
+
 	_ "github.com/lib/pq"
 )
 
 func main() {
+	var id, name string
+	var code int
 	db := connectDB()
 	defer db.Close()
-	fmt.Println("Choose : \n 1-Create,\n 2-Update,\n 3-Delete ,\n 4-Get all")
+	fmt.Println("Choose : \n 1-Create row \n 2-Update row  \n 3-Delete row \n 4-Get all")
 	userType := 0
 	_, err := fmt.Scan(&userType)
 	if err != nil {
@@ -36,20 +39,43 @@ func main() {
 		}
 		fmt.Println("Country created successfully")
 	case 3:
+		fmt.Println("Choose : \n 1-Soft delete \n 2-hard delete ")
+		userType := 0
+		_, err = fmt.Scan(&userType)
+		if err != nil {
+			panic(err)
+		}
+		inv := storage.NewInventory(db)
+
 		countries, err := inv.GetAll()
 		if err != nil {
 			return
 		}
 		fmt.Println("Countries: ", countries)
 
-		var id string
+
+		switch userType {
+		case 1:
+
+			var id string
+			fmt.Println("IDni tanlang")
+			fmt.Scan(&id)
+			err = inv.Delete(id)
+			if err != nil {
+				return
+			}
+			fmt.Println("Country DELETE successfully")
+
+		case 2:
 		fmt.Println("IDni tanlang")
 		fmt.Scan(&id)
-		err = inv.Delete(id)
+		err = inv.Delete1(country.Country{},id)
 		if err != nil {
 			return
 		}
-		fmt.Println("Country DELETE successfully")
+		fmt.Println("Country delete successfully")
+
+		}
 
 	case 2:
 		countries, err := inv.GetAll()
@@ -58,8 +84,7 @@ func main() {
 		}
 		fmt.Println("Countries: ", countries)
 
-		var id, name string
-		var code int
+	
 		fmt.Println("IDni tanlang")
 		fmt.Scan(&id)
 		fmt.Println("updete country name")

@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"homework/2-oy/4-dars/homework/country"
-
 	"github.com/google/uuid"
 )
 
@@ -39,6 +38,19 @@ func (i *Inventory) Update(c country.Country, name string, code int, id string) 
 			WHERE id = $1`, id, name, code)
 	if err != nil {
 		fmt.Println("error while updating country err: ", err)
+		return err
+	}
+
+	return nil
+}
+
+func (i *Inventory) Delete1(c country.Country,  id string) error {
+	_, err := i.db.Exec(
+		`UPDATE countries SET 
+		   deleted_at=NOW()
+			WHERE id = $1`, id)
+	if err != nil {
+		fmt.Println("error while delete1 country err: ", err)
 		return err
 	}
 
