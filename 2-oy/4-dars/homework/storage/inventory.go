@@ -70,6 +70,24 @@ func (i *Inventory) Delete(id string) error {
 	return nil
 }
 
+func (i *Inventory) GetById (id string)(country.Country,error) {
+	var countries country.Country
+	err:=i.db.QueryRow(`
+	SELECT
+	id,
+	name,
+	code,
+	created_at
+	FROM countries
+	WHERE id=$1`,id).Scan(&countries.Id, &countries.Name, &countries.Code, &countries.CreatedAt)
+	if err !=nil {
+		fmt.Println("error while get by id countries err:",err)
+		return countries,err
+	}
+	return countries,nil	
+	
+}
+
 
 func (i *Inventory) GetAll() ([]country.Country, error) {
 	countries := []country.Country{}

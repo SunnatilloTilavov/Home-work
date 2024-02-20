@@ -14,7 +14,7 @@ func main() {
 	var code int
 	db := connectDB()
 	defer db.Close()
-	fmt.Println("Choose : \n 1-Create row \n 2-Update row  \n 3-Delete row \n 4-Get all")
+	fmt.Println("Choose : \n 1-Create row \n 2-Update row  \n 3-Delete row \n 4-Get all \n 5-GetBYid")
 	userType := 0
 	_, err := fmt.Scan(&userType)
 	if err != nil {
@@ -55,7 +55,7 @@ func main() {
 
 
 		switch userType {
-		case 1:
+		case 2:
 
 			var id string
 			fmt.Println("IDni tanlang")
@@ -66,7 +66,7 @@ func main() {
 			}
 			fmt.Println("Country DELETE successfully")
 
-		case 2:
+		case 1:
 		fmt.Println("IDni tanlang")
 		fmt.Scan(&id)
 		err = inv.Delete1(country.Country{},id)
@@ -104,6 +104,20 @@ func main() {
 			return
 		}
 		fmt.Println("Countries: ", countries)
+
+	case 5:	
+	countries, err := inv.GetAll()
+	if err != nil {
+		return
+	}
+	fmt.Println("Countries: ", countries)
+	fmt.Println("IDni tanlang")
+	fmt.Scan(&id)
+	onecountry,err := inv.GetById(id)
+		if err != nil {
+			return
+		}
+		fmt.Println(onecountry)
 	}
 
 }
