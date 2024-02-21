@@ -47,7 +47,7 @@ func main() {
 		}
 		inv := storage.NewInventory(db)
 
-		countries, err := inv.GetAll()
+		countries, err := inv.GetId()
 		if err != nil {
 			return
 		}
@@ -78,7 +78,7 @@ func main() {
 		}
 
 	case 2:
-		countries, err := inv.GetAll()
+		countries, err := inv.GetId()
 		if err != nil {
 			return
 		}
@@ -106,7 +106,7 @@ func main() {
 		fmt.Println("Countries: ", countries)
 
 	case 5:	
-	countries, err := inv.GetAll()
+	countries, err := inv.GetId()
 	if err != nil {
 		return
 	}

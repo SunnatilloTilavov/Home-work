@@ -112,3 +112,24 @@ func (i *Inventory) GetAll() ([]country.Country, error) {
 
 	return countries, nil
 }
+
+func (i *Inventory) GetId() ([]country.Country, error) {
+	countries := []country.Country{}
+	rows, err := i.db.Query(`select id from countries WHERE deleted_at is null`)
+	if err != nil {
+		fmt.Println("error while getting all countries err: ", err)
+		return nil, err
+	}
+
+	for rows.Next() {
+		c := country.Country{}
+		if err = rows.Scan(&c.Id); err != nil {
+			fmt.Println("error while scanning country err: ", err)
+			return nil, err
+		}
+		countries = append(countries, c)
+	}
+
+	return countries, nil
+}
+
