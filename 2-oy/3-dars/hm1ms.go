@@ -13,7 +13,11 @@ CREATE TABLE City(
     City_name varchar(25),
     country_id uuid References Contry(countryid)
 );
-INSERT INTO Country(country_name) values('Uzbekistan'),('USA'),('Kanada'),('China'),('Germany');
+INSERT INTO Country(country_name) values('Uzbekistan'),
+('USA'),
+('Kanada'),
+('China'),
+('Germany');
 INSERT INTO City (City_name, country_id) VALUES
 ('Tashkent', '485f52cf-0afc-4400-9ead-29a1a77061ae'),
 ('Samarqand', '485f52cf-0afc-4400-9ead-29a1a77061ae'),
@@ -29,7 +33,7 @@ INSERT INTO City (City_name, country_id) VALUES
 SELECT City.City_name, Country.country_name FROM City JOIN Country ON City.country_id = Country.countryid;
 SELECT AVG(length(City_name)) From city;
 SELECT COUNT(City_name) FROM City;
-//SELECT Country.country_name from Country JOIn CITY  WHERE (ON COUNT(City.country_id = Country.countryid)>3);
+//SELECT Country.country_name from Country JOIN CITY  WHERE (ON COUNT(City.country_id = Country.countryid)>3);
 SELECT *FROM CITY WHERE City_name like'A%' ;
 
 ALTER TABLE City ADD COLUMN population INT;

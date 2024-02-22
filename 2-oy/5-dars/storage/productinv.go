@@ -20,10 +20,10 @@ func NewProductinv(db *sql.DB) Productinv {
 func (i *Productinv) Create1(c models.Product) error {
 	id := uuid.NewString()
 	_, err := i.db.Exec(
-		`INSERT INTO Category (id,name,category_id,created_at)
+		`INSERT INTO Product (id,name,category_id,created_at)
 		VALUES($1,$2,$3,CURRENT_TIMESTAMP)`, id, c.Name,c.Category_id)
 	if err != nil {
-		fmt.Println("error while creating Category err: ", err)
+		fmt.Println("error while creating Product err: ", err)
 		return err
 	}
 
@@ -32,12 +32,12 @@ func (i *Productinv) Create1(c models.Product) error {
 
 func (i *Productinv) Update(c models.Product, name string, id string) error {
 	_, err := i.db.Exec(
-		`UPDATE Category SET 
+		`UPDATE Product SET 
 		    name=$2,
 			updated_at=NOW()
 			WHERE id = $1`, id, name)
 	if err != nil {
-		fmt.Println("error while updating Category err: ", err)
+		fmt.Println("error while updating Product err: ", err)
 		return err
 	}
 
@@ -46,11 +46,11 @@ func (i *Productinv) Update(c models.Product, name string, id string) error {
 
 func (i *Productinv) Delete1(c models.Product, id string) error {
 	_, err := i.db.Exec(
-		`UPDATE Category SET 
+		`UPDATE Product SET 
 		   deleted_at=NOW()
 			WHERE id = $1`, id)
 	if err != nil {
-		fmt.Println("error while delete1 Category err: ", err)
+		fmt.Println("error while delete1 Product err: ", err)
 		return err
 	}
 
@@ -59,10 +59,10 @@ func (i *Productinv) Delete1(c models.Product, id string) error {
 
 func (i *Productinv) Delete(id string) error {
 	_, err := i.db.Exec(
-		`DELETE FROM Category
+		`DELETE FROM Product
 			WHERE id = $1`, id)
 	if err != nil {
-		fmt.Println("error while deleting Category: ", err)
+		fmt.Println("error while deleting Product: ", err)
 		return err
 	}
 
@@ -76,10 +76,10 @@ func (i *Productinv) GetById(id string) (models.Product, error) {
 	id,
 	name,
 	created_at
-	FROM Category
+	FROM Product
 	WHERE id=$1`, id).Scan(&countries.Id, &countries.Name, &countries.CreatedAt)
 	if err != nil {
-		fmt.Println("error while get by id Category err:", err)
+		fmt.Println("error while get by id Product err:", err)
 		return countries, err
 	}
 	return countries, nil
@@ -91,16 +91,16 @@ func (i *Productinv) GetAll() ([]models.Product, error) {
 	rows, err := i.db.Query(`select 
 	id,
 	name,
-	created_at from Category WHERE deleted_at is null`)
+	created_at from Product WHERE deleted_at is null`)
 	if err != nil {
-		fmt.Println("error while getting all Cproduct err: ", err)
+		fmt.Println("error while getting all Product err: ", err)
 		return nil, err
 	}
 
 	for rows.Next() {
 		c := models.Product{}
 		if err = rows.Scan(&c.Id, &c.Name, &c.CreatedAt); err != nil {
-			fmt.Println("error while scanning Category err: ", err)
+			fmt.Println("error while scanning Product err: ", err)
 			return nil, err
 		}
 		Products = append(Products, c)
@@ -111,16 +111,16 @@ func (i *Productinv) GetAll() ([]models.Product, error) {
 
 func (i *Productinv) GetId() ([]models.Product, error) {
 	Products := []models.Product{}
-	rows, err := i.db.Query(`select id from Category WHERE deleted_at is null`)
+	rows, err := i.db.Query(`select id from Product WHERE deleted_at is null`)
 	if err != nil {
-		fmt.Println("error while getting all Category err: ", err)
+		fmt.Println("error while getting all Product err: ", err)
 		return nil, err
 	}
 
 	for rows.Next() {
 		c := models.Product{}
 		if err = rows.Scan(&c.Id); err != nil {
-			fmt.Println("error while scanning Category err: ", err)
+			fmt.Println("error while scanning Product err: ", err)
 			return nil, err
 		}
 		Products = append(Products, c)
@@ -128,5 +128,4 @@ func (i *Productinv) GetId() ([]models.Product, error) {
 
 	return Products, nil
 }
-
-
+2

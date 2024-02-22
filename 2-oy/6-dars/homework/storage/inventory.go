@@ -3,7 +3,8 @@ package storage
 import (
 	"database/sql"
 	"fmt"
-	"homework/2-oy/4-dars/homework/country"
+	"homework/2-oy/6-dars/homework/country"
+
 	"github.com/google/uuid"
 )
 
@@ -44,7 +45,7 @@ func (i *Inventory) Update(c country.Country, name string, code int, id string) 
 	return nil
 }
 
-func (i *Inventory) Delete1(c country.Country,  id string) error {
+func (i *Inventory) Delete1(c country.Country, id string) error {
 	_, err := i.db.Exec(
 		`UPDATE countries SET 
 		   deleted_at=NOW()
@@ -56,7 +57,6 @@ func (i *Inventory) Delete1(c country.Country,  id string) error {
 
 	return nil
 }
-
 
 func (i *Inventory) Delete(id string) error {
 	_, err := i.db.Exec(
@@ -70,24 +70,23 @@ func (i *Inventory) Delete(id string) error {
 	return nil
 }
 
-func (i *Inventory) GetById (id string)(country.Country,error) {
+func (i *Inventory) GetById(id string) (country.Country, error) {
 	var countries country.Country
-	err:=i.db.QueryRow(`
+	err := i.db.QueryRow(`
 	SELECT
 	id,
 	name,
 	code,
 	created_at
 	FROM countries
-	WHERE id=$1`,id).Scan(&countries.Id, &countries.Name, &countries.Code, &countries.CreatedAt)
-	if err !=nil {
-		fmt.Println("error while get by id countries err:",err)
-		return countries,err
+	WHERE id=$1`, id).Scan(&countries.Id, &countries.Name, &countries.Code, &countries.CreatedAt)
+	if err != nil {
+		fmt.Println("error while get by id countries err:", err)
+		return countries, err
 	}
-	return countries,nil	
-	
-}
+	return countries, nil
 
+}
 
 func (i *Inventory) GetAll() ([]country.Country, error) {
 	countries := []country.Country{}
@@ -127,9 +126,30 @@ func (i *Inventory) GetId() ([]country.Country, error) {
 			fmt.Println("error while scanning country err: ", err)
 			return nil, err
 		}
-		 countries = append(countries, c)
+		countries = append(countries, c)
 	}
 
 	return countries, nil
 }
 
+func (i *Inventory) GetSearch(search string) ([]country.Country, error) {
+	countries := []country.Country{}
+	rows, err := i.db.Query(`SELECT id, name, code, created_at FROM countries WHERE name LIKE $1 AND deleted_at IS NULL`, search+"%")
+	if err != nil {
+		fmt.Println("Error while getting countries:", err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		c := country.Country{}
+		if err := rows.Scan(&c.Id, &c.Name, &c.Code, &c.CreatedAt); err != nil {
+			fmt.Println("Error while scanning country:", err)
+			return nil, err
+		}
+		countries = append(countries, c)
+	}
+
+	return countries, nil
+}
