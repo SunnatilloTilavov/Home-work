@@ -1,13 +1,16 @@
 sudo -u postgres psql -d sqldatabase
 \c sqldatabase 
 
-CREATE TABLE Customer(
+CREATE TABLE Customer1(
     id uuid DEFAULT gen_random_uuid() Primary key,
     name varchar(25),
     phone varchar(25) UNIQUE,
     created_at timestamp DEFAULT CURRENT_TIMESTAMP,
-    deleted_at timestamp,
+    deleted_at timestamp
 );
+
+CREATE UNIQUE INDEX index_name
+ON Customer1(phone,deleted_at);
 
 CREATE TABLE Adress(
     id uuid DEFAULT gen_random_uuid() ,
@@ -16,7 +19,7 @@ CREATE TABLE Adress(
 
 );
 
-INSERT INTO Customer (name,phone) values('adasda',1234567),
+INSERT INTO Customer1 (name,phone) values('adasda',1234567),
 ('awdaw',9173231),
 ('awdwad',11289738),
 ('awdawdad',6213137);

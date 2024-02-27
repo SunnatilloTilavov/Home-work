@@ -111,6 +111,8 @@ func (i *Inventory) GetAll() ([]country.Country, error) {
 	return countries, nil
 }
 
+
+
 func (i *Inventory) GetId() ([]country.Country, error) {
 	countries := []country.Country{}
 	rows, err := i.db.Query(`select id from countries WHERE deleted_at is null`)
