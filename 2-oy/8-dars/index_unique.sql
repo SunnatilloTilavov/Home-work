@@ -1,5 +1,4 @@
 sudo -u postgres psql -d sqldatabase
-\c sqldatabase 
 
 CREATE TABLE Customer1(
     id uuid DEFAULT gen_random_uuid() Primary key,
