@@ -78,5 +78,6 @@ $$;
 
 drop function totalprice();
 
+
 SELECT * from totalprice() ;
 
