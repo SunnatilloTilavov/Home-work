@@ -6,6 +6,7 @@ import (
 	"homework/2-oy/10-dars/rent_car/controller"
 	"homework/2-oy/10-dars/rent_car/storage"
 
+	_ "github.com/google/uuid"
 	_ "golang.org/x/text/cases"
 )
 
@@ -20,7 +21,7 @@ func main() {
 
 	c := controller.NewController(store)
 
-	fmt.Println("Choose : \n 1-Create row \n 2-Update row  \n 3-Delete row \n 4-Get all ")
+	fmt.Println("Choose : \n 1-Create row \n 2-Update row  \n 3-Delete row \n 4-Get all \n 5-GETBYid")
 	userType := 0
 	_, err = fmt.Scan(&userType)
 	if err != nil {
@@ -28,11 +29,14 @@ func main() {
 	}
 	switch userType {
 	case 1:
-	c.CreateCar()
+		c.CreateCar()
 	case 2:
-	c.Update()
+		c.Update()
 	case 3:
-	// c.Delete()
+		var id string
+		fmt.Println("IDni tanlang")
+		fmt.Scan(&id)
+		c.Store.Car.Delete(id)
 	case 4:
 		cars, err := store.Car.GetAll()
 		if err != nil {
@@ -40,8 +44,16 @@ func main() {
 		}
 		fmt.Println("Cars: ", cars)
 
+	case 5:
+		var id string
+		fmt.Println("IDni tanlang")
+		fmt.Scan(&id)
+		onecountry, err := store.Car.GetById(id)
+		if err != nil {
+			return
+		}
+		fmt.Println(onecountry)
+
+	}
+
 }
-
-
-}
-

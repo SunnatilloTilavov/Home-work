@@ -3,8 +3,8 @@ package storage
 import (
 	"database/sql"
 	"fmt"
-	"homework/2-oy/10-dars/rent_car/models"
 	"github.com/google/uuid"
+	"homework/2-oy/10-dars/rent_car/models"
 )
 
 type carRepo struct {
@@ -55,7 +55,6 @@ func (c *carRepo) Create(car models.Car) (string, error) {
 	return id.String(), nil
 }
 
-
 func (c *carRepo) Update(car models.Car) (string, error) {
 
 	id := uuid.New()
@@ -85,12 +84,10 @@ func (c *carRepo) Update(car models.Car) (string, error) {
 	return id.String(), nil
 }
 
-
-
-func (i *carRepo) Delete(car models.Car) error {
+func (i *carRepo) Delete(id string) error {
 	_, err := i.db.Exec(
 		`DELETE FROM cars
-			WHERE id = $1`,car.Id)
+			WHERE id = $1`, id)
 	if err != nil {
 		fmt.Println("Error while deleting cars: ", err)
 		return err
@@ -109,7 +106,7 @@ func (i *carRepo) GetAll() ([]models.Car, error) {
 		hourse_power,
 		colour,
 		engine_cap,
-		created_at from cars WHERE deleted_at is null`)
+		created_at from cars WHERE deleted_at=0`)
 	if err != nil {
 		fmt.Println("error while getting all cars err: ", err)
 		return nil, err
@@ -120,7 +117,7 @@ func (i *carRepo) GetAll() ([]models.Car, error) {
 		if err = rows.Scan(car.Id,
 			car.Name, car.Brand,
 			car.Model, car.HoursePower,
-			car.Colour, car.EngineCap,car.CreatedAt); err != nil {
+			car.Colour, car.EngineCap, car.CreatedAt); err != nil {
 			fmt.Println("error while scanning country err: ", err)
 			return nil, err
 		}
@@ -128,4 +125,29 @@ func (i *carRepo) GetAll() ([]models.Car, error) {
 	}
 
 	return cars, nil
+}
+
+
+func (i *carRepo) GetById (id string)([]models.Car, error) {
+	cars := []models.Car{}
+	car := models.Car{}
+	err:=i.db.QueryRow(`
+	select 
+	id,
+		name,
+		brand,
+		model,
+		hourse_power,
+		colour,
+		engine_cap,
+		created_at from cars WHERE deleted_at=0 and id=$1`,id).Scan(&car.Id,
+		car.Name, car.Brand,
+		car.Model, car.HoursePower,
+		car.Colour, car.EngineCap, car.CreatedAt)
+	if err !=nil {
+		fmt.Println("error while get by id countries err:",err)
+		return cars,err
+	}
+	return cars,nil	
+	
 }
