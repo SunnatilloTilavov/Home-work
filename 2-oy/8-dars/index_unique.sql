@@ -9,7 +9,7 @@ CREATE TABLE Customer1(
 );
 
 CREATE UNIQUE INDEX index_phone
-ON Customer1(phone,deleted_at);
+ON Customers(phone,deleted_at);
 
 SELECT 
     phone, 
