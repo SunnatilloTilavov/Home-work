@@ -1,0 +1,4 @@
+Fetched http://www.google.com:18478 bytes
+Fetched http://www.google.com:18548 bytes
+Fetched http://www.wikipedia.org:78031 bytes
+Fetched http://www.github.com:223449 bytes

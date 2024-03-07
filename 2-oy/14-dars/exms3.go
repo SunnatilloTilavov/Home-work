@@ -32,7 +32,7 @@ func main(){
 	now :=time.Now()
 
 	urls:=[]string{
-		"h.examp.com",
+		"http://www.google.com",
 		"http://www.google.com",
 		"http://www.github.com",
 		"http://www.wikipedia.org",

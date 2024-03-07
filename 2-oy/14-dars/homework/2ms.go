@@ -7,37 +7,33 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"sync"
 	"time"
 )
 
 func main() {
-var wg sync.WaitGroup
 now:=time.Now()
-
- url := "https://jsonplaceholder.typicode.com/comments"
- response, err := http.Get(url)
+ response, err := http.Get("https://jsonplaceholder.typicode.com/comments")
  if err != nil {
-  fmt.Println("http.Get:", err)
+  fmt.Println("Get error", err)
   return
  }
  defer response.Body.Close()
 
  body, err := ioutil.ReadAll(response.Body)
  if err != nil {
-  fmt.Println("ReadAll:", err)
+  fmt.Println("ReadAll error", err)
   return
  }
 
  var comments []map[string]interface{}
  err = json.Unmarshal(body, &comments)
  if err != nil {
-  fmt.Println("Unmarshal:", err)
+  fmt.Println("JSON Unmaarshal error", err)
   return
  }
  Data, err := json.MarshalIndent(comments, "", "    ")
  if err != nil {
-  fmt.Println("MarshalIndent:", err)
+  fmt.Println("JSON MArshal error", err)
   return
  }
  var a string
@@ -46,20 +42,19 @@ now:=time.Now()
 	a=strconv.Itoa(i)+".json"
 	Filename, err := os.Create(a)
 	if err != nil {
-	 fmt.Println("Create:", err)
+	 fmt.Println("Crate error", err)
 	 return
 	}
 	defer Filename.Close()
-    go Writefile(Data,Filename,&wg) //
-	wg.Add(1)
+    go Writefile1(Data,Filename) //
  }
- wg.Wait()
+
  fmt.Println("time:",time.Since(now).Seconds())
 
 }
 
-func Writefile(Data []byte,Filename *os.File,wg *sync.WaitGroup){ //,
-	defer wg.Done()
+func Writefile1(Data []byte,Filename *os.File){ //,
+
 	Filename.Write(Data)
-	fmt.Println("Write Data .")
+	fmt.Println("Write data.")
 }
